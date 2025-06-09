@@ -20,7 +20,7 @@
     <link name="base_link"></link>
 
     <!-- CHASSIS LINK -->
-    <joint name="chassis_joing" type="fixed">
+    <joint name="chassis_joint" type="fixed">
         <parent link="base_link" />
         <child link="chassis" />
         <origin xyz="-0.1 0 0" />
