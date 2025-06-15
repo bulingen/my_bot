@@ -54,3 +54,35 @@ sudo apt install ros-humble-image-transport-plugins
 ```bash
 ros2 run image_transport republish compressed raw --ros-args -r in/compressed:=/camera/image_raw/compressed -r out:=/camera/image_raw/uncompressed
 ```
+
+### ROS2 Control
+
+**List hardware interfaces and controllers:**
+
+```bash
+ros2 control list_hardware_interfaces
+```
+
+```bash
+ros2 control list_controllers
+```
+
+**Register(?) controllers in controller manager:**
+
+Notice that when using Humble, it should be `spawner`, whereas in Foxy it should be `spawner.py`.
+
+```bash
+ros2 run controller_manager spawner joint_broad
+```
+
+```bash
+ros2 run controller_manager spawner diff_cont
+```
+
+Also notice that these spawns are already done in the launch file.
+
+**Remap topics for teleop_twist_keyboard to work with these controllers:**
+
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
+```
