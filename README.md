@@ -27,6 +27,12 @@ rviz2
 
 And then open the file `drive_bot.rviz` in `src/config`.
 
+**Get it running in Rviz in one command:**
+
+```bash
+rviz2 -d src/my_bot/config/main.rviz
+```
+
 **Drive the thing around:**
 
 ```bash
