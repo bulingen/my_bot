@@ -92,3 +92,24 @@ Also notice that these spawns are already done in the launch file.
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
 ```
+
+### SLAM
+
+For mapping the environment, set `mode: mapping` in the `mapper_params_online_async.yaml`. Then start the `launch_sim.launch.py`. Open Rviz with the `slam_bot.rviz` config file.
+
+Then run: `ros2 launch slam_toolbox online_async_launch.py slam_params_file:=./src/my_bot/config/mapper_params_online_async.yaml use_sim_time:=true`.
+
+(Note: in Foxy, the param is `params_file` but in Humble, it's `slam_params_file`.)
+
+**To save a map created in Rviz:**
+
+- Click `Panels > Add New Panel > Slam Toobox Plugin`.
+- `Save Map`: `my_map_save` (old format).
+- `Serialize Map`: `my_map_serial` (to reuse with Slam Toolbox).
+
+**To reuse an already created map:**
+
+- Change to `mode: localization` in the `slam_params_file`.
+- Uncomment `map_file_name` and set it to the full path of the serial map, but without file extension. E. g. `map_file_name: /home/bulingen/Code/my_bot_ws/my_map_serial`.
+- Uncomment `map_start_at_dock: true`.
+- Start up everything as before, but now the map should be loaded from start.
